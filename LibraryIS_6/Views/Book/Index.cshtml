@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Book";
+}
+
+@model IEnumerable<Book>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Book List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Book" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Add New Book
+            </a>
+        </div>
+    </div>
+
+    <br />
+
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Search item: <input type="text" name="SearchString" value=@ViewData["SearchString"] /> &nbsp;
+
+                Filter: <select name="Filter" value=@ViewData["Filter"]>
+                    <option>
+                        Title
+                    </option>
+                    <option>
+                        Author
+                    </option>
+                    <option>
+                        Genre
+                    </option>
+                </select>
+
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="Index">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+
+    <br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Genre
+                </th>
+                <th>
+                    Publisher
+                </th>
+                <th>
+                    Inventory number
+                </th>
+                <th>
+                    Shelf number
+                </th>
+                <th>
+                    Stock number
+                </th>
+                <th>
+                    Is Available
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="20%">
+                        @obj.Name
+                    </td>
+                    <td width="20%">
+                        @string.Format("{0} {1}", @obj.Author.FirstName, obj.Author.LastName)
+                    </td>
+                    <td width="10%">
+                        @obj.Genre.Name
+                    </td>
+                    <td width="10%">
+                        @obj.Publisher.Name
+                    </td>
+                    <td width="10%">
+                        @obj.InventoryId
+                    </td>
+                    <td width="5%">
+                        @obj.Inventory.ShelfNumber
+                    </td>
+                    <td width="5%">
+                        @obj.Inventory.StockNumber
+                    </td>
+                    <td width="5%">
+                        @obj.Inventory.IsAvailable
+                    </td>
+                    <td width="15%">
+                        <div class="w-100 btn-group text-right" role="group">
+                            <a asp-controller="Book" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2 btn-sm" style="width:100px"> <i class="bi bi-pencil-square"></i> Edit</a>
+                            <a asp-controller="Book" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2 btn-sm" style="width:100px"> <i class="bi bi-trash"> </i> Delete</a>
+                            @*if(obj.IsAvailable == true)
+                            {
+                                <a asp-controller="Loan" asp-action="Create" asp-route-id="@obj.Id" class="btn btn-secondary mx-2 btn-sm" style="width:100px">Check out</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Loan" asp-action="ChekIn" asp-route-id="@obj.Id" class="btn btn-secondary mx-2 btn-sm" style="width:100px">Check in</a>
+                            }*@
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

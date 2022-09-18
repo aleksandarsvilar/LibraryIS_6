@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Book";
+}
+
+@model Book
+
+<div class="col-6 pt-4">
+
+    <div class="pb-4">
+        <h2 class="text-primary">Book details</h2>
+    </div>
+
+    <div class="card mb-3 border-info">
+        <div class="card-body">
+            <h4 class="card-title">@Model.Name</h4>
+            <h6 class="card-subtitle mb-2 text-muted">@string.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName)</h6>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"> <strong>Inventory Id: </strong> @string.Format(" {0}", Model.Inventory.Id) </li>
+            <li class="list-group-item"> <strong>Genre: </strong>@string.Format(" {0}", Model.Genre.Name) </li>
+            <li class="list-group-item"> <strong>Publisher: </strong>@string.Format(" {0}", Model.Publisher.Name) </li>
+            <li class="list-group-item"> <strong>ISBN: </strong>@string.Format(" {0}", Model.ISBN) </li>
+            <li class="list-group-item"> <strong>Is available: </strong>@string.Format(" {0}", Model.Inventory.IsAvailable) </li>
+        </ul>
+    </div>
+
+    <div class="text-end">
+        <a asp-controller="Book" asp-action="List" class="btn btn-secondary style="width:150px">Back to List</a>
+    </div>
+
+</div>

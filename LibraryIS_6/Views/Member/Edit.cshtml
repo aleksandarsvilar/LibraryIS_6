@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Member";
+}
+
+@model Member
+
+<form method="post" asp-action="Edit">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Member</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for=FirstName></label>
+            <input asp-for=FirstName class="form-control" />
+            <span asp-validation-for=FirstName class="text-danger"></span>
+        </div>
+         <div class="mb-3">
+            <label asp-for=LastName></label>
+            <input asp-for=LastName class="form-control" />
+            <span asp-validation-for=LastName class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for=Address></label>
+            <input asp-for=Address class="form-control" />
+            <span asp-validation-for=Address class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for=EmailAddress></label>
+            <input asp-for=EmailAddress class="form-control" />
+            <span asp-validation-for=EmailAddress class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for=RegistrationDate></label>
+            <input asp-for=RegistrationDate class="form-control" />
+            <span asp-validation-for=RegistrationDate class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</Button>
+        <a asp-controller="Member" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"></partial>
+}

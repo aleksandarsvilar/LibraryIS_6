@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Book";
+}
+
+@model IEnumerable<Book>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">List of Books</h2>
+        </div>
+    </div>
+
+    <br />
+
+    <form asp-action="List" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Search item: <input type="text" name="SearchString" value=@ViewData["SearchString"] /> &nbsp;
+
+                Filter:
+                <select name="Filter" value=@ViewData["Filter"]>
+                    <option>
+                        Title
+                    </option>
+                    <option>
+                        Author
+                    </option>
+                    <option>
+                        Genre
+                    </option>
+                </select>
+
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-controller="Book" asp-action="List">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+
+    <br />
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Genre
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="30%">
+                        @obj.Name
+                    </td>
+                    <td width="30%">
+                        @string.Format("{0} {1}", obj.Author.FirstName, obj.Author.LastName)
+                    </td>
+                    <td width="30%">
+                        @obj.Genre.Name
+                    </td>
+                    <td style="grid-auto-columns">
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-primary btn-sm" style="width:100px">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

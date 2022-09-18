@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Book";
+}
+
+@model Book
+
+<form method="post" asp-action="DeletePOST">
+    <input asp-for="@Model.Id" hidden/>
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Delete Book</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for=Name></label>
+            <input asp-for=Name disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for=Author.FirstName></label>
+            <input asp-for=Author.FirstName disabled class="form-control" />
+        </div>
+                <div class="mb-3">
+            <label asp-for=Author.LastName></label>
+            <input asp-for=Author.LastName disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for=Genre.Name></label>
+            <input asp-for=Genre.Name disabled class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-danger" style="width:150px">Delete</Button>
+        <a asp-controller="Book" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"></partial>
+}

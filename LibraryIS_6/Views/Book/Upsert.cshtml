@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Book";
+}
+
+@model BookVM
+
+<form method="post" asp-action="Upsert">
+    @if(Model.Book.Id != 0)
+    {
+        <input asp-for="Book.Id" hidden />
+        <input asp-for="Book.Inventory.Id" hidden /> 
+    }
+    <div class="border p-3 mt-4">
+
+        <div class="row pb-2">
+            <h2 class="text-primary">@(Model.Book.Id != 0 ? "Update" : "Add") Book</h2>
+            <hr />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for=Book.Name></label>
+            <input asp-for=Book.Name class="form-control" />
+            <span asp-validation-for=Book.Name class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for=Book.ISBN></label>
+            <input asp-for=Book.ISBN class="form-control" />
+            <span asp-validation-for=Book.ISBN class="text-danger"></span>
+        </div> 
+
+        <div class="mb-3">
+            <label asp-for=Book.Description></label>
+            <textarea asp-for=Book.Description class="form-control"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for=Book.AuthorId></label>
+            <select asp-for="Book.AuthorId" asp-items="@Model.AuthorList" class="form-select">
+                <option disabled selected>-- Select Author --</option>
+            </select>
+            <span asp-validation-for=Book.AuthorId class="text-danger"></span>
+        </div> 
+
+        <div class="mb-3">
+            <label asp-for=Book.GenreId></label>
+            <select asp-for="Book.GenreId" asp-items="@Model.GenreList" class="form-select">
+                <option disabled selected>-- Select Genre --</option>
+            </select>
+            <span asp-validation-for=Book.GenreId class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for=Book.PublisherId></label>
+            <select asp-for="Book.PublisherId" asp-items="@Model.PublisherList" class="form-select">
+                <option disabled selected>-- Select Publisher --</option>
+            </select>
+            <span asp-validation-for=Book.PublisherId class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for=Book.PublicationDate></label>
+            <input asp-for=Book.PublicationDate class="form-control" />
+            <span asp-validation-for=Book.PublicationDate class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for=Book.Inventory.ShelfNumber></label>
+            <input asp-for=Book.Inventory.ShelfNumber class="form-control" />
+            <span asp-validation-for=Book.Inventory.ShelfNumber class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for=Book.Inventory.StockNumber></label>
+            <input asp-for=Book.Inventory.StockNumber class="form-control" />
+            <span asp-validation-for=Book.Inventory.StockNumber class="text-danger"></span>
+        </div>
+
+        <div>
+            @if(Model.Book.Id != 0)
+            {
+                <button type="submit" class="btn btn-primary" style="width:150px">Update</Button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary" style="width:150px">Add</Button>
+            }
+
+            <a asp-controller="Book" asp-action="Index" class="btn btn-Secondary" style="width:150px">Back to List</a>
+        </div>
+
+    </div>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"></partial>
+}

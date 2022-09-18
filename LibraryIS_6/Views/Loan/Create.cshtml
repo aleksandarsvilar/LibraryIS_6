@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Loan";
+}
+
+@model LoanVM
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Add Loan</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Loan.MemberId">Member name</label>
+            <select asp-for=Loan.MemberId asp-items="@Model.MembersList" class="form-select">
+                <option disabled selected>-- Select Member --</option>
+            </select>
+            <span asp-validation-for=Loan.MemberId class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for=Loan.InventoryId>Book</label>
+            <select asp-for=Loan.InventoryId asp-items="@Model.BooksList" class="form-select">
+                <option disabled selected>-- Select Book --</option>
+            </select>
+            <span asp-validation-for=Loan.InventoryId class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for=Loan.LoanDate>Loan date</label>
+            <input asp-for=Loan.LoanDate class="form-control" />
+            <span asp-validation-for=Loan.LoanDate class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for=Loan.DueDate>Due date</label>
+            <input asp-for=Loan.DueDate class="form-control" />
+            <span asp-validation-for=Loan.DueDate class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Add</button>
+        <a asp-controller="Loan" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial"></partial>
+}
